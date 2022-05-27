@@ -4,5 +4,4 @@ DROP DATABASE IF EXISTS finance_db;
 -- CREATE DATABASE
 CREATE DATABASE finance_db;
 
-
-USe finance_db
+USE finance_db
