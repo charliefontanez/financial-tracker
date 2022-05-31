@@ -2,6 +2,18 @@ const User = require('../../models/User');
 
 const router = require('express').Router();
 
+router.get('/', (req,res) => {
+    User.findAll({
+        where: {
+            email: req.body.email,
+            password: req.body.password
+        }
+    }).then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+        console.log(err);
+        res.json(err);
+    })
+})
 router.post('/login', (req,res) => {
     // const login = require('../../public/js/login')
     try {
