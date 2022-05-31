@@ -7,10 +7,21 @@ router.get('/', (req,res) => {
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
         console.log(err);
-        res.status(500).json(err);
+        res.json(err);
     })
 })
 
+router.post('/', (req,res) => {
+    User.create({
+     username: req.body.username,
+     email: req.body.email,
+     password: req.body.password   
+    }).then(newUserData => res.json(newUserData))
+    .catch(err => {
+        console.log(err);
+        res.json(err)
+    })
+})
 router.post('/login',async (req,res) => {
     try {
     const dbUserData = await User.findOne({
@@ -19,18 +30,18 @@ router.post('/login',async (req,res) => {
         }
     });
     if (!dbUserData) {
-        res.status(500).json({message: 'Incorrect email or password'})
+        res.json({message: 'Incorrect email or password'})
     }
     const validPassword = await dbUserData.checkPassword(req.body.password)
     
     if (!validPassword) {
-        res.status(400).json({message: 'Incorrect email or password'})
+        res.json({message: 'Incorrect email or password'})
     }
     if (validPassword){
      req.session.save(() => {
     req.session.loggedIn = true
      res
-     .status(200)
+     
     .json({user: dbUserData,message: 'You are now logged in'})
     });
 
@@ -38,7 +49,7 @@ router.post('/login',async (req,res) => {
 }
     catch(err) {
         console.log(err);
-        res.status(500).json(err);
+        res.json(err);
     }
 })
 
@@ -46,10 +57,10 @@ router.post('/login',async (req,res) => {
 router.post('/logout', (req,res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
-            res.status(204).end();
+            res.end();
         });
     } else{
-        res.status(404).end();
+        res.end();
     }
 })
 module.exports = router;

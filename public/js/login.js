@@ -2,9 +2,11 @@ console.log('stuff');
 var testUser = {
     'username': 'Ortaylo'
 }
-const email = 'owentaylor60@yahoo.com';
-const password = '123456'
+
+
 const login = async (event) => {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value.trim();
     event.preventDefault();
     const response = await fetch('/api/user/login',{
         method: 'POST',
@@ -19,5 +21,5 @@ const login = async (event) => {
     }      
 }
 document
-    .querySelector('.btn')
-    .addEventListener('click', login)
+    .querySelector('.login-form')
+    .addEventListener('submit', login)
