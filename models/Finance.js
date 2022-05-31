@@ -10,7 +10,6 @@ Finance.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
@@ -30,7 +29,6 @@ Finance.init(
       },
       user_id:{
           type: DataTypes.INTEGER,
-          allowNull: false,
         reference:{
             model: 'user',
             key: 'id'
