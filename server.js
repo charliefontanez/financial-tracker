@@ -19,6 +19,9 @@ sess = {
         db: sequelize,
     }),
 }
+
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sess));
 app.engine('handlebars', hbs.engine);
@@ -30,8 +33,9 @@ app.use(function(req, res, next) {
   });
   app.use(require("body-parser").json());
 app.use(routes);
-app.use(express.static(path.join(__dirname, 'public')));
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+
+app.use(express.static(path.join(__dirname, 'public')))
+sequelize.sync({force: false}).then(() => {
+app.listen(PORT, ()=>console.log('Now Listening'))
 });
 
