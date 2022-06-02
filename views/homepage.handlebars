@@ -1,6 +1,48 @@
 <h1>Welcome</h1>
 {{#if loggedIn}}
+
 <h2>You are logged in!</h2>
 {{else}}
 <h2>You are not logged in</h2>
 {{/if}}
+<div class="card-group container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class = "col">
+                    <div class="card bg-success mb-3" style="max-width: 18rem;">
+
+                        <div class = "card-body">
+                            <form>
+                                <h2 class = "card-header">Income</h2>
+                                <input type="text" name="description" placeholder="Description" class = "card-text">
+                                <input type="text" name="income" placeholder="Income" class = "card-text">
+                                <button class = "card-text">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "col">
+                    <div class ="card bg-danger mb-3" style="max-width: 18rem;">
+                        <div class = "card-body ">
+                            <form class = "">
+                                <h2 class = "card-header">Expense</h2>
+                                <input type="text" name="description" placeholder="Description" class = "card-text">
+                                <input type="text" name="Expense" placeholder="Expense" class = "card-text">
+                                <button class = "card-text">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col">
+                    <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+                        <h3 class = "text-success">Total income</h3>
+                        <h1>&#8722</h1>
+                        <h3 class = "text-danger">Total expense</h3>
+                        <h1>&#61</h1>
+                        <h3>Total cash flow</h3>
+                    </div>
+                </div>
+            </div>   
+
+
+        </div>  
