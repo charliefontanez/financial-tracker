@@ -32,12 +32,12 @@ router.get('/', (req, res) => {
       });
   });
 
-  //router.post('/finance', withAuth, (req, res) => {
-///Finance.create({
- //       income: req.body.income,
- //       expences: req.body.expences,
-  //      user_id : req.session.user_id
-  //    })
-  //});
+//router.post('/finance', withAuth, (req, res) => {
+//Finance.create({
+  //    income: req.body.income,
+ //    expences: req.body.expences,
+ //   user_id : req.session.user_id
+ //   })
+//});
 
 module.exports = router;
