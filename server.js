@@ -4,7 +4,6 @@ const sequelize = require('./config/connection');
 const exhbs = require ('express-handlebars');
 const hbs = exhbs.create({});
 const path = require('path');
-
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const PORT = 3001;
@@ -20,6 +19,8 @@ sess = {
         db: sequelize,
     }),
 }
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sess));

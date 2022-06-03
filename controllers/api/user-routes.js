@@ -11,17 +11,23 @@ router.get('/', (req,res) => {
     })
 })
 
-router.post('/', (req,res) => {
-    User.create({
-     username: req.body.username,
-     email: req.body.email,
-     password: req.body.password   
-    }).then(newUserData => res.json(newUserData))
-    .catch(err => {
-        console.log(err);
-        res.json(err)
-    })
-})
+router.post('/', async (req, res) => {
+    try {
+      const dbUserData = await User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      });
+  
+      req.session.save(() => {
+        req.session.loggedIn = true;
+  
+        res.status(200).json(dbUserData);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }});
 router.post('/login',async (req,res) => {
     try {
     const dbUserData = await User.findOne({
@@ -40,9 +46,8 @@ router.post('/login',async (req,res) => {
     if (validPassword){
      req.session.save(() => {
     req.session.loggedIn = true
-     res
-     
-    .json({user: dbUserData,message: 'You are now logged in'})
+    req.session.user_id = JSON.stringify(dbUserData.id)
+     res.json({user: dbUserData,message: `You are now logged in as ${dbUserData.username}`})
     });
 
         }
@@ -63,4 +68,23 @@ router.post('/logout', (req,res) => {
         res.end();
     }
 })
+
+router.delete('/:id', (req, res) => {
+    User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbUserData => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No user found with this id' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 module.exports = router;
