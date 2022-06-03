@@ -31,13 +31,13 @@ Income.init(
           key: 'id'
       }
       },
-    //  user_id:{
-    //      type: DataTypes.INTEGER,
-      //  reference:{
-     //       model: 'user',
-      //      key: 'id'
-      //  }
-    //  }
+     user_id:{
+         type: DataTypes.INTEGER,
+       reference:{
+           model: 'user',
+           key: 'id'
+       }
+     }
   },
   {
     sequelize,

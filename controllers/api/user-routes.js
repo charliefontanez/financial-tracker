@@ -11,6 +11,25 @@ router.get('/', (req,res) => {
     })
 })
 
+router.get('/:id', (req,res) => {
+  User.findAll( {
+    where: {
+      id: req.params.id
+    },
+    include: {
+      
+        
+      
+    }
+})
+  .then(dbUserData => res.json(dbUserData))
+  .catch(err => {
+      console.log(err);
+      res.json(err);
+  })
+})
+
+
 router.post('/', async (req, res) => {
     try {
       const dbUserData = await User.create({
