@@ -24,4 +24,23 @@ router.post('/', (req,res) => {
         res.status(500).json(err);
     })
 })
+
+router.delete('/:id', (req, res) => {
+    Expense.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbExpenseData => {
+        if (!dbExpenseData) {
+          res.status(404).json({ message: 'No user found with this id' });
+          return;
+        }
+        res.json(dbExpenseData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 module.exports = router
