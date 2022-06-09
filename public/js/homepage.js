@@ -1,16 +1,23 @@
 var IncomeData;
-async function loadUserData() {
-    await fetch('/api/income', {
+
+    fetch('/api/income', {
         method: 'GET',
         headers:{'Content-Type': 'application/json'}
-    }) .then(response => response.json()) .then(data => console.log(data[0]));
-    // if (response.ok) {
-    //     console.log('succsess')
-    //     // console.info()
-    // } else {
-    //     console.log('wrong')
-    // }
-}
+    }) .then(response => response.json()) .then(data => {
+        for(var i = 0;i< data.length;i++) {
+            loadData(data[i].name,data[i].income,'income');
+        }
+    });
+   
+
+    fetch('/api/expense', {
+        method: 'GET',
+        headers:{'Content-Type': 'application/json'}
+    }) .then(response => response.json()) .then(data => {
+        for(var i = 0;i< data.length;i++) {
+            loadData(data[i].name,data[i].expense,'expense');
+        }
+    });
 
 
 
@@ -51,7 +58,18 @@ const expenseFormHandler = async (event) => {
     }
 }
 
+function loadData(name,value,type) {
+    // const card = document.querySelector('income-card');
+    const list = document.querySelector(`.${type}-list`);
+    const liEl = document.createElement('li');
+    liEl.textContent = name + ' ' + value
+    if (list != null) {
+        list.appendChild(liEl);
+    } else {
+        return;
+    }
 
+}
 document.querySelector('.income-form')
 .addEventListener('submit', incomeFormHandler);
 
@@ -59,4 +77,4 @@ document.querySelector('.income-form')
 document.querySelector('.expense-form')
 .addEventListener('submit', expenseFormHandler);
 
-loadUserData();
+loadData();

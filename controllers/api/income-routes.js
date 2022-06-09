@@ -1,12 +1,11 @@
 const router = require('express').Router();
-const res = require('express/lib/response');
 const {Income} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req,res) => {
     Income.findAll({
         where: {
-            id: req.session.user_id
+            user_id: req.session.user_id
         }
     })
     .then(dbIncomeData => res.json(dbIncomeData))
