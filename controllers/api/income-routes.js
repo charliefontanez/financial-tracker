@@ -4,7 +4,11 @@ const {Income} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req,res) => {
-    Income.findAll()
+    Income.findAll({
+        where: {
+            id: req.session.user_id
+        }
+    })
     .then(dbIncomeData => res.json(dbIncomeData))
     .catch(err => {
         console.log(err);

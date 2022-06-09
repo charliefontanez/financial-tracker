@@ -1,3 +1,18 @@
+var IncomeData;
+async function loadUserData() {
+    await fetch('/api/income', {
+        method: 'GET',
+        headers:{'Content-Type': 'application/json'}
+    }) .then(response => response.json()) .then(data => console.log(data[0]));
+    // if (response.ok) {
+    //     console.log('succsess')
+    //     // console.info()
+    // } else {
+    //     console.log('wrong')
+    // }
+}
+
+
 
 const incomeFormHandler = async (event) => {
 event.preventDefault();
@@ -43,3 +58,5 @@ document.querySelector('.income-form')
 
 document.querySelector('.expense-form')
 .addEventListener('submit', expenseFormHandler);
+
+loadUserData();
