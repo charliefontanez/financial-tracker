@@ -15,16 +15,16 @@ Finance.init(
     },
     income:{
         type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate:{
-          isDecimal: true,     
+        reference:{
+          model: 'income',
+          key: 'id'
         }
       },
       expense:{
         type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate:{
-          isDecimal: true,     
+        reference:{
+          model: 'expense',
+          key: 'id'
         }
       },
       user_id:{

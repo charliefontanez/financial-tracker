@@ -3,30 +3,23 @@ const sequelize = require('../config/connection');
 
 const financedata =[
     {
-      income:10,
-      expense:9,
       user_id: 1,
-    },
-    {
-      income:11,
-      expense:10,
-      user_id: 2,
     }
   ]
   const incomeData =[
       {
-          name: 'salary',
-          income: 9.1,
-          finance_id:1
-
+          name: 'salary1',
+          income: 9.2,
+          finance_id:1,
+          user_id:1
       }
   ]
   const expenseData =[
     {
-        name: 'gas',
-        expense: 8,
-        finance_id:1
-
+        name: 'gas1',
+        expense: 9,
+        finance_id:1,
+        user_id:1
     }
 ]
 

@@ -1,4 +1,4 @@
-const User = require('../../models/User');
+const { Income,User, Expense } = require('../../models');
 
 const router = require('express').Router();
 
@@ -16,11 +16,14 @@ router.get('/:id', (req,res) => {
     where: {
       id: req.params.id
     },
-    include: {
-      
-        
-      
-    }
+    include: [
+      {
+        model: Income
+      },
+      {
+        model:Expense
+      }
+    ]
 })
   .then(dbUserData => res.json(dbUserData))
   .catch(err => {
@@ -32,7 +35,7 @@ router.get('/:id', (req,res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const dbUserData = await User.create({
+      const newUserData = await User.create({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
@@ -40,13 +43,15 @@ router.post('/', async (req, res) => {
   
       req.session.save(() => {
         req.session.loggedIn = true;
-  
-        res.status(200).json(dbUserData);
+        req.session.user_id = JSON.stringify(newUserData.id)
+        res.status(200).json(newUserData);
       });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }});
+
+
 router.post('/login',async (req,res) => {
     try {
     const dbUserData = await User.findOne({

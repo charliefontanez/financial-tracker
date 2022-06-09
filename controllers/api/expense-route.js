@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const res = require('express/lib/response');
-const {Income} = require('../../models');
+const {Expense} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req,res) => {
-    Income.findAll()
-    .then(dbIncomeData => res.json(dbIncomeData))
+    Expense.findAll()
+    .then(dbExpenseData => res.json(dbExpenseData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err)
@@ -13,13 +12,13 @@ router.get('/', (req,res) => {
 })
 
 router.post('/', (req,res) => {
-    Income.create({
+    Expense.create({
         name: req.body.name,
-        income: req.body.income,
+        expense: req.body.expense,
         finance_id: req.body.finance_id,
         user_id: req.session.user_id
     })
-    .then(newIncomeData => res.json(newIncomeData))
+    .then(newExpenseData => res.json(newExpenseData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
