@@ -17,7 +17,7 @@ The repo contains a server.js file, a views folder containing the login features
 
 Using any desktop browser, open the above-mentioned link to view the webpage.
 
-![Financial-Tracker](assets/images/screenshot.png)
+![Financial-Tracker](./images/financial-tracker-screenshot.png)
 
 
 ## Credits
