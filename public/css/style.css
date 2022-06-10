@@ -1,0 +1,14 @@
+body{
+    background-color: black; 
+}
+.main-form {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 100px;
+}
+form div{
+    text-align: end;
+}
+form {
+    text-align: center;
+}

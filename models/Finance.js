@@ -10,27 +10,25 @@ Finance.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
     income:{
         type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate:{
-          isDecimal: true,     
+        reference:{
+          model: 'income',
+          key: 'id'
         }
       },
       expense:{
         type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate:{
-          isDecimal: true,     
+        reference:{
+          model: 'expense',
+          key: 'id'
         }
       },
       user_id:{
           type: DataTypes.INTEGER,
-          allowNull: false,
         reference:{
             model: 'user',
             key: 'id'
