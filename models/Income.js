@@ -33,6 +33,7 @@ Income.init(
       },
      user_id:{
          type: DataTypes.INTEGER,
+         allowNull: false,
        reference:{
            model: 'user',
            key: 'id'

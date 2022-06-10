@@ -1,14 +1,10 @@
 const router = require('express').Router();
-const {Income} = require('../../models');
+const {Expense} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req,res) => {
-    Income.findAll({
-        where: {
-            user_id: req.session.user_id
-        }
-    })
-    .then(dbIncomeData => res.json(dbIncomeData))
+    Expense.findAll()
+    .then(dbExpenseData => res.json(dbExpenseData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err)
@@ -16,13 +12,13 @@ router.get('/', (req,res) => {
 })
 
 router.post('/', (req,res) => {
-    Income.create({
+    Expense.create({
         name: req.body.name,
-        income: req.body.income,
+        expense: req.body.expense,
         finance_id: req.body.finance_id,
         user_id: req.session.user_id
     })
-    .then(newIncomeData => res.json(newIncomeData))
+    .then(newExpenseData => res.json(newExpenseData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -30,23 +26,21 @@ router.post('/', (req,res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    Income.destroy({
+    Expense.destroy({
       where: {
         id: req.params.id
       }
     })
-      .then(dbIncomeData => {
-        if (!dbIncomeData) {
+      .then(dbExpenseData => {
+        if (!dbExpenseData) {
           res.status(404).json({ message: 'No user found with this id' });
           return;
         }
-        res.json(dbIncomeData);
+        res.json(dbExpenseData);
       })
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
       });
   });
-
-
 module.exports = router
