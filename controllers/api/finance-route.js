@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {Finance} = require('../../models');
-//const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
   Finance.findAll({
@@ -32,12 +32,12 @@ router.get('/', (req, res) => {
       });
   });
 
-  //router.post('/finance', withAuth, (req, res) => {
-///Finance.create({
- //       income: req.body.income,
- //       expences: req.body.expences,
-  //      user_id : req.session.user_id
-  //    })
-  //});
+router.post('/finance', withAuth, (req, res) => {
+Finance.create({
+     income: req.body.income,
+    expences: req.body.expences,
+   user_id : req.session.user_id
+   })
+});
 
 module.exports = router;
