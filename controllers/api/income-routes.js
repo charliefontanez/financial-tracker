@@ -48,5 +48,30 @@ router.delete('/:id', (req, res) => {
       });
   });
 
+router.put('/:id', (req,res) => {
+    Income.update(
+    {
+        name: req.body.name,
+        income: req.body.parsed.income
+    },
+    {
+        where: {
+            id: req.params.id
+        }
+    }
+    ) .then(updatedIncomeData => {
+        if (!updatedIncomeData) {
+        //   res.status(404).json({ message: 'could not update Income Data' });
+          return;
+        }
+        res.json(updatedIncomeData);
+        // res.json(req.body);
+      })
+      .catch(err => {
+        console.log(err);
+        // res.status(500).json(err);
+      });
+    console.log(req.body)
+  });
 
 module.exports = router
