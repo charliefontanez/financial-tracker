@@ -43,4 +43,31 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
       });
   });
-module.exports = router
+
+router.put('/:id', (req,res) => {
+    Expense.update(
+    {
+        name: req.body.name,
+        expense: req.body.parsed.expense
+    },
+    {
+        where: {
+            id: req.params.id
+        }
+    }
+    ) .then(updatedExpenseData => {
+        if (!updatedExpenseData) {
+        //   res.status(404).json({ message: 'could not update Expense Data' });
+          return;
+        }
+        res.json(updatedExpenseData);
+        // res.json(req.body);
+      })
+      .catch(err => {
+        console.log(err);
+        // res.status(500).json(err);
+      });
+    console.log(req.body)
+  });
+
+  module.exports = router

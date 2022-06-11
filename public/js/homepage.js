@@ -1,3 +1,4 @@
+
 var IncomeData;
 const fetchIncome = async () => {
 await fetch('/api/income', {
@@ -73,6 +74,10 @@ function loadData(id,name,value,type) {
     const list = document.querySelector(`.${type}-list`);
     const liEl = document.createElement('li');
     const deleteBtn = document.createElement('button');
+    const nameTextarea = document.createElement('textarea');
+    const valueTextarea = document.createElement('textarea');
+    nameTextarea.value = name;
+    valueTextarea.value = value;
     deleteBtn.setAttribute('type', 'click');
     deleteBtn.textContent = 'Delete';
     deleteBtn.addEventListener('click', async function() {
@@ -88,10 +93,32 @@ function loadData(id,name,value,type) {
                     console.log('wrong')
                 }
     })
-    liEl.textContent = name + ' ' + value
+    const updateBtn = document.createElement('button');
+    updateBtn.setAttribute('type', 'click');
+    updateBtn.textContent = 'Update';
+    updateBtn.addEventListener('click', async function() {
+        var parsed = JSON.parse('{"' + type + '" : "' + valueTextarea.value + '"}')
+        
+        const response = await fetch(`/api/${type}/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({name , parsed}),
+                    headers:{'Content-Type': 'application/json'}
+                })
+                if (response.ok) {
+                console.log(response)
+                console.info(response)
+                
+                } else {
+                    console.log('wrong')
+                }
+        // console.log(arr)
+    })
     if (list != null) {
         list.appendChild(liEl);
+        liEl.appendChild(nameTextarea);
+        liEl.appendChild(valueTextarea);
         liEl.appendChild(deleteBtn);
+        liEl.appendChild(updateBtn)
     } else {
         return;
     }
@@ -112,7 +139,6 @@ function loadData(id,name,value,type) {
 // }
 document.querySelector('.income-form')
 .addEventListener('submit', incomeFormHandler);
-
 
 document.querySelector('.expense-form')
 .addEventListener('submit', expenseFormHandler);
