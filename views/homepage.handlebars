@@ -34,11 +34,11 @@
                 </div>
                 <div class = "col">
                     <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
-                        <h3 class = "text-success">Total income</h3>
+                        <h3 id = "total_income" class = "text-success">Total income</h3>
                         <h1>&#8722</h1>
-                        <h3 class = "text-danger">Total expense</h3>
+                        <h3 id = "total_expense" class = "text-danger">Total expense</h3>
                         <h1>&#61</h1>
-                        <h3>Total cash flow</h3>
+                        <h3 id = "total_cash">Total cash flow</h3>
                     </div>
                 </div>
             </div>   
@@ -54,6 +54,7 @@
 
 {{#if loggedIn}}
 <h2>You are logged in!</h2>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/js/homepage.js"></script>
 {{else}}
 <h2>You are not logged in</h2>

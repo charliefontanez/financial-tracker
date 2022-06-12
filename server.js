@@ -12,7 +12,7 @@ app.use(express.json());
 
 sess = {
     secret: 'Super secret',
-    cookie: {},
+    cookie: {maxAge:60000},
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore ({

@@ -1,5 +1,14 @@
 
 var IncomeData;
+
+var totalIncomeEl = $("#total_income");
+var totalExpenseEl = $("#total_expense");
+var totalCashEl = $("#total_cash");
+
+var incomeTotal =0;
+var expenseTotal=0;
+var cashTotal=0;
+
 const fetchIncome = async () => {
 await fetch('/api/income', {
     method: 'GET',
@@ -7,6 +16,8 @@ await fetch('/api/income', {
 }) .then(response => response.json()) .then(data => {
     for(var i = 0;i< data.length;i++) {
         loadData(data[i].id,data[i].name,data[i].income,'income');
+        incomeTotal += data[i].income;
+        UpdateTotal();
     }
 });
 }
@@ -20,6 +31,9 @@ const fetchExpense = async () => {
     }) .then(response => response.json()) .then(data => {
         for(var i = 0;i< data.length;i++) {
             loadData(data[i].id,data[i].name,data[i].expense,'expense');
+            expenseTotal += data[i].expense;
+            console.log(data[i].expense)
+            UpdateTotal();
         }
     });
 }
@@ -125,6 +139,16 @@ function loadData(id,name,value,type) {
 
 }
 
+var UpdateTotal = function(){
+    cashTotal = incomeTotal - expenseTotal;
+    console.log(incomeTotal);
+    console.log(expenseTotal);
+    console.log(cashTotal);
+    totalIncomeEl.text (incomeTotal);
+    totalExpenseEl.text(expenseTotal);
+    totalCashEl.text(cashTotal);
+}
+
 // async function(type) {
 //     const response = await fetch('/api/income', {
 //         method: 'DELETE',
@@ -144,4 +168,5 @@ document.querySelector('.expense-form')
 .addEventListener('submit', expenseFormHandler);
 fetchExpense();
 fetchIncome();
+//UpdateTotal();
 loadData();
