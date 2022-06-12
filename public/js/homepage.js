@@ -9,6 +9,12 @@ var incomeTotal =0;
 var expenseTotal=0;
 var cashTotal=0;
 
+var format = new Intl.NumberFormat('en-US',{
+    style: 'currency',
+    currency:'USD',
+    minimumFractionDigits:2
+})
+
 const fetchIncome = async () => {
 await fetch('/api/income', {
     method: 'GET',
@@ -144,9 +150,9 @@ var UpdateTotal = function(){
     console.log(incomeTotal);
     console.log(expenseTotal);
     console.log(cashTotal);
-    totalIncomeEl.text (incomeTotal);
-    totalExpenseEl.text(expenseTotal);
-    totalCashEl.text(cashTotal);
+    totalIncomeEl.text (format.format(incomeTotal));
+    totalExpenseEl.text(format.format(expenseTotal));
+    totalCashEl.text(format.format(cashTotal));
 }
 
 // async function(type) {
