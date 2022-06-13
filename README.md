@@ -12,7 +12,7 @@ Link to the deploy website:
 
 The repo contains a server.js file, a views folder containing the login features, an utils folder, a seeds folder, a public folder, a models folder, a db folder, a controllers folder, a config folder, an images folder containing an image overview of the app. These files were deployed at the above-mentioned link using Heroku. The repo can also be cloned to a local machine.
 
-##Website
+## Website
 https://sleepy-cliffs-13403.herokuapp.com/
 
 ## Usage
