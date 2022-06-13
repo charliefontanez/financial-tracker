@@ -16,7 +16,7 @@ await fetch('/api/income', {
 }) .then(response => response.json()) .then(data => {
     for(var i = 0;i< data.length;i++) {
         loadData(data[i].id,data[i].name,data[i].income,'income');
-        incomeTotal += data[i].income;
+        incomeTotal += parseFloat(data[i].income);
         UpdateTotal();
     }
 });
@@ -31,7 +31,7 @@ const fetchExpense = async () => {
     }) .then(response => response.json()) .then(data => {
         for(var i = 0;i< data.length;i++) {
             loadData(data[i].id,data[i].name,data[i].expense,'expense');
-            expenseTotal += data[i].expense;
+            expenseTotal += parseFloat(data[i].expense);
             console.log(data[i].expense)
             UpdateTotal();
         }
